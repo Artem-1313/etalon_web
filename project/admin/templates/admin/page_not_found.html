@@ -1,0 +1,8 @@
+
+{% block content %}
+
+
+<p><img src="{{ url_for('static',filename='images/errors/error.png') }}" class="decorators"> </p>
+<h1 class="h1_decorators">Упс...! Такої сторінки не знайдено!</h1>
+<a href="{{ url_for('admin.index') }}" class="unauth">На головну!</a>
+{% endblock %}

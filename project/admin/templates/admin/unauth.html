@@ -1,0 +1,8 @@
+
+{% block content %}
+
+
+<p><img src="{{ url_for('static',filename='images/errors/unauth.png') }}" class="decorators"> </p>
+<h1 class="h1_decorators">Упс...! Спершу необхідно авторизуватись!</h1>
+<a href="{{ url_for('admin.index') }}" class="unauth">Увійти!</a>
+{% endblock %}

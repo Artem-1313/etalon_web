@@ -1,0 +1,26 @@
+{% extends 'admin/base.html'%}
+
+{% block content %}
+<div class="container">
+Твоя поточна аватарка:
+    <img src="/static/images/ava/{{ user.avatar }}">
+</div>
+
+<div class="container">
+    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+        {{form.hidden_tag()}}
+         
+
+        {{form.avatar(class_="form-control")}}
+        <br>
+        {{form.submit(class_="btn btn-primary")}}
+        {% if form.errors %}
+                {% for k,error in form.errors.items() %}
+                          <span class="form-control alert alert-danger">{{ error |join(' ') }}</span>
+                {% endfor %}
+        {% endif %}
+    </form>
+</div>
+
+
+{% endblock %}

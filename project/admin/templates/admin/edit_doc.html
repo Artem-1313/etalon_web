@@ -1,0 +1,40 @@
+{% extends 'admin/base.html'%}
+
+{% block content %}
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="alert alert-danger">{{msg}}</div>
+{% endfor %}
+
+<div class="container">
+    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                {{form.hidden_tag()}}
+
+                <label>Заголовок документу</label>
+                {{form.name(class_="form-control", value=docs.name )}}
+                <label> Опис документу</label>
+                {{form.description(class_="form-control", id="text", value=docs.description)}}
+                <label>Завантажити документ</label>
+                {{form.path(class_="form-control-file")}}
+                <small class="form-text text-muted">Завантажуйте документ лише у форматі <b>PDF</b>. Програма автоматично згенерує архів <b>ZIP.</b></small>
+                {% if form.errors %}
+
+
+                    {% for k,error in form.errors.items() %}
+                      <span class="form-control alert alert-danger">{{ error |join(' ') }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+                 {{form.submit(class_="btn btn-primary")}}
+        </form>
+
+</div>
+<script>
+    var test = `{{ docs.description | safe }}`
+    $("textarea#text").val( test );
+</script>
+
+
+
+
+{% endblock %}

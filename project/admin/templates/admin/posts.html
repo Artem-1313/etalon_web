@@ -1,0 +1,84 @@
+{% extends 'admin/base.html'%}
+
+{% block content %}
+
+<div class="container-fluid" >
+	  <form action="{{url_for('admin.add_post')}}">
+
+         <input type="submit" class="btn btn-info" value="Додати статтю" />
+    </form>
+    <br>
+
+	<table class="table table-striped" >
+	  <thead>
+		<tr>
+		    <th scope="col">Заголовок</th>
+			<th scope="col">Зображення</th>
+		    <th scope="col">Стаття</th>
+			<th scope="col">Тип</th>
+			<th scope="col">Дія</th>
+		</tr>
+	  </thead>
+	  <tbody>
+	  {% for i in posts.items %}
+		<tr>
+		  <td>{{ i.title }}</td>
+		  <td><img src="/{{i.url}}"  alt="" class="img-fluid" width="120" height="90"></td>
+		  <td>
+			  <div class="test">
+			  {{ i.text | striptags | truncate(800, True)}}
+		  		</div>
+		  </td>
+			<td> {{ i.type }}</td>
+		  <td>
+			  <button class="btn btn-light" data-toggle="modal" data-target='#edit{{ i.id }}' style="color:red;">
+				  <!--<a href="{{ url_for('admin.delete_post',id=i.id)}}" style="color:red;"> -->
+					  <i class="glyphicon glyphicon-remove"></i>
+				 <!-- </a> -->
+			  </button>
+			  <div class="modal fade" id="edit{{ i.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+					<div class="modal-content">
+					  <div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Видалити пост?</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+					  </div>
+					  <div class="modal-body">
+						Ви дійсно бажаєте видалити пост? Ви не зможете відмінити Вашу дію.
+					  </div>
+					  <div class="modal-footer" style="">
+
+						<form action="{{ url_for('admin.delete_post',id=i.id)}}" method="get">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Відмінити</button>
+							<button class="btn btn-danger btn-primary" type="submit">Видалити</button>
+						</form>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			  <button class="btn btn-light"><a href="{{ url_for('admin.edit',id=i.id)}}" style="color:green;"><i class="glyphicon glyphicon-edit"></i></a></button>
+		  </td>
+		</tr>
+	  </tbody>
+
+		{% endfor %}
+	</table>
+{% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num %}
+        {% if posts.page == page_num %}
+     <a class="btn btn-primary mb-8" href="{{url_for('admin.show_posts',page=page_num)}}">{{ page_num }}</a>
+         {% else %}
+      <a class="btn btn-default mb-8" href="{{url_for('admin.show_posts',page=page_num)}}">{{ page_num }}</a>
+        {% endif %}
+    {% else %}
+        ...
+    {% endif %}
+    {% endfor %}
+</div>
+<!-- Modal -->
+
+
+
+{% endblock %}

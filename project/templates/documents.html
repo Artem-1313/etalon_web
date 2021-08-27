@@ -1,0 +1,33 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+		<tr>
+		    <th scope="col">Документ</th>
+			<th scope="col">Опис</th>
+		    <th scope="col">Переглянути</th>
+			<th scope="col">Завантажити</th>
+		</tr>
+	  </thead>
+      <tbody>
+            {% for d in documents %}
+            <tr>
+                <td> {{ d.name }}</td>
+                <td> {{ d.description }}</td>
+                <td> <a href="/upload_doc/{{ d.path }}" target="blank" ><img src="/static/images/doc_images/view.png"></a></td>
+               <td> <a href="/upload_doc/{{ d.path| replace('.pdf', '.zip')| replace('.PDF', '.zip') }} " download><img src="/static/images/doc_images/download.png"></a></td>
+            </tr>
+      </tbody>
+         {% endfor %}
+    </table>
+
+
+
+
+
+
+</div>
+
+{% endblock %}

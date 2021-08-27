@@ -1,0 +1,34 @@
+.footer{
+background-color:#000000;
+font-family: 'Poppins', serif !important;
+
+padding: 4rem 0 4rem;
+}
+
+
+.footer p{
+color: #999999 !important;
+font-size:19px;
+}
+
+.footer ul{
+padding:0;
+}
+.footer ul li{
+color: #999999 !important;
+font-size:15px;
+padding: 0.4rem 0.2rem 0.6rem;
+border-bottom: 1px dashed #dadada;
+list-style:none;
+}
+
+.footer .widget-title{
+color: #999999 !important;
+}
+
+.footer ul li a {
+    color: #999999 !important;
+}
+.footer ul li a:hover {
+    color: #1f54af !important;
+}

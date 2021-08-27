@@ -1,0 +1,96 @@
+{% extends 'base.html'%}
+{% block content %}
+
+
+<div style=" float:right;">
+<div class="main">
+			  <h2><a href="{{url_for('main.cyber')}}">Кібербезпека</a></h2>
+			  <div class="slider slider-nav">
+                 {% for post   in posts_cyber%}
+				<div>
+                    <h3>
+
+                        <a href="{{ url_for('main.show_post',id_article = post.id )}}" >
+                             <img src="{{post.url}}" width="265" height="130" alt="" class="img-fluid img-thumbnail">
+                        </a>
+                    </h3>
+                </div>
+				 {% endfor %}
+			  </div>
+			</div>
+</div>
+<div class="">
+    <div class="container-fluid">
+
+        <div class="row">
+{% for post in posts.items%}
+
+            <div class="col-lg-9">
+ <hr class="invis1">
+                <div class="page-wrapper">
+                    <div class="blog-list clearfix">
+        <div class="blog-box row">
+            <div class="col-md-3">
+                <div class="post-media">
+
+                    <a href="{{ url_for('main.show_post',id_article = post.id )}}" >
+                    <img src="{{post.url}}"  alt="" class="img-fluid">
+                        <div class="hovereffect"></div>
+                    </a>
+                </div><!--end media-->
+            </div><!--end col-md 4-->
+            <div class="blog-meta big-meta col-md-9">
+                <h4><a href="{{ url_for('main.show_post',id_article = post.id )}}" >{{ post.title }}</a></h4>
+                <p>{{ post.text | striptags | truncate(240, True)  }}</p>
+                    <div class="tags">
+                    {% for tag in post.tags %}
+                      <a href="{{ url_for('main.show_tag', tag_id = tag.id)}}"> <span class="badge badge-info"> {{ tag }}   </span> </a>
+                    {% endfor %}
+                    </div>
+                <small> <span class="badge badge-primary"><a href="{{ url_for('main.admin_articles',user = post.admin_author )}}" >{{post.admin_author}}</a></span></small>
+                <small class="text-muted">{{post.date_post.strftime('%Y-%m-%d')}}</small>
+
+            </div><!--end blog-meta-->
+        </div><!--end blog-box-->
+
+
+
+    </div><!--end blog-list clearfix-->
+
+                </div> <!--end page-wrapper-->
+
+            </div><!--end col-lg-12 -->
+{% endfor %}
+
+
+        </div><!--end row -->
+ <div style="margin:20px auto;">
+
+
+    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num %}
+        {% if posts.page == page_num %}
+     <a class="btn btn-primary mb-8" href="{{url_for('main.index',page=page_num)}}">{{ page_num }}</a>
+         {% else %}
+      <a class="btn btn-default mb-8" href="{{url_for('main.index',page=page_num)}}">{{ page_num }}</a>
+        {% endif %}
+    {% else %}
+        ...
+    {% endif %}
+    {% endfor %}
+</div>
+    </div><!--end container -->
+</div>
+
+<script>
+
+ $('.slider-nav').slick({
+   slidesToShow: 1,
+   slidesToScroll: 1,
+
+ });
+
+</script>
+
+
+{% endblock %}

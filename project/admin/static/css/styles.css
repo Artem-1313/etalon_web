@@ -1,0 +1,40 @@
+body{
+background:grey;
+}
+
+.add_post input[name="title"], textarea, input[type="submit"]{
+
+display:block;
+margin: 20px auto;
+text-align:center;
+height:20px;
+width:40%;
+
+}
+.add_post textarea{
+resize: none;
+}
+
+.add_post input[type="submit"]{
+width:80px;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+th{
+width: 100px
+}
+td {
+width: 250px
+}
+
+.admin_info{
+
+background-color: #ffffff;
+    padding: 1rem 1.5rem 1rem;
+    font-family:  serif;
+    font-size: 21px;
+    font-weight:bold;
+}
+

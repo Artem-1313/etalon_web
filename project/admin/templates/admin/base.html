@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('.static',filename='css/bootstrap-tagsinput.css') }}" >
+
+     <title>Admin-Panel сайту ОК "Схід"</title>
+<link rel="stylesheet" href="{{ url_for('.static',filename='css/admin-css.css') }}" >
+ <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="{{ url_for('.static',filename='css/bootstrap/css/bootstrap.min.css') }}" >
+
+<!-- Optional theme -->
+<link rel="stylesheet"  href="{{ url_for('.static',filename='css/bootstrap/css/bootstrap-theme.min.css')}}">
+
+<!-- Latest compiled and minified JavaScript -->
+
+<script src="{{ url_for('.static',filename='js/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ url_for('.static',filename='css/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('.static',filename='js/bootstrap-tagsinput.min.js') }}"></script>   
+</head>
+<body>
+
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="container-fluid" >
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#etalon-menu">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+        </div>
+        <div class="collapse navbar-collapse" id="etalon-menu">
+            <ul class="nav navbar-nav">
+                <li class="test"><a href="{{url_for('admin.show_posts')}}">Статті</a> </li>
+                <li class="test"><a href="{{url_for('admin.show_commanders')}}">Командири</a> </li>
+                <li class="dropdown inverse">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Документація<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="{{ url_for('admin.show_docs',type_of_doc='asu_doc') }}">АСУ "Дніпро"</a></li>
+                            <li class="divider"></li>
+                          <li><a href="{{ url_for('admin.show_docs',type_of_doc='isd_doc') }}">ІСД-Інтернет</a></li>
+                            <li class="divider"></li>
+                          <li><a href="{{ url_for('admin.show_docs',type_of_doc='cyber_doc') }}">Кібербезпека</a></li>
+                            <li class="divider"></li>
+
+                        </ul>
+                </li>
+                <li class="dropdown inverse">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Довідники<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="{{ url_for('admin.show_phones') }}">Телефонний довідник</a></li>
+                            <li class="divider"></li>
+                          <li><a href="{{ url_for('admin.show_emails') }}">Довідник електронних адрес</a></li>
+
+                        </ul>
+                </li>
+
+            </ul>
+
+             <ul class="nav navbar-nav navbar-right">
+
+                <li class="dropdown inverse">
+
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span style="color:white; font-style:italic;"> Привіт, {{ current_user.get_login() }} </span><i class="glyphicon glyphicon-user"></i><b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="{{url_for('admin.logout_admin')}}"><i class="glyphicon glyphicon-log-out"></i> Вийти</a></li>
+                            <li class="divider"></li>
+                          <li><a href="{{url_for('admin.change_password')}}"><i class="glyphicon glyphicon-cog"></i> Змінити пароль</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{url_for('admin.change_ava')}}"><i class="glyphicon glyphicon-sunglasses"></i> Змінити аватар</a></li>
+                            {% if current_user.get_login() == 'artem' %}
+                                <li><a href="{{url_for('admin.add_admin')}}"><i class="glyphicon glyphicon-plus"></i> Додати адміністратора</a></li>
+                                <li><a href="{{url_for('admin.show_admins')}}"><i class="glyphicon glyphicon-eye-open"></i> Керування адміністраторами</a></li>
+
+                            {% endif %}
+
+                        </ul>
+                </li>
+             </ul>
+
+        </div>
+    </div>
+</nav>
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="alert alert-{{ cat }}"><i class="glyphicon glyphicon-remove" onclick=delete_flash(this)>{{msg}}</i></div>
+{% endfor %}
+<div  style="min-height:1000px;">
+        {% block content %}
+
+        {% endblock %}
+</div>
+<br>
+<footer class="footer">
+    <div class="container-fluid">
+       <div class="row">
+           <div class="col-lg-5">
+               <div class="widget">
+                    <h2 class="widget-title"> Оперативне командування "Схід" </h2>
+                   <div style="color: #999999 !important;">Адміністративна панель сайту<p>Сайт працює в тестовому режимі.</p> Версія 2.000</div>
+               </div>
+
+           </div>
+
+           <div class="col-lg-3">
+               <div class="widget">
+                   <h2 class="widget-title">
+                       Зворотній зв'язок
+                   </h2>
+                    <div class="link">
+                       <ul>
+                           <li> <i class="glyphicon glyphicon-flag"></i> Надії Алексеєнко 42</li>
+                           <li> <i class="glyphicon glyphicon-phone-alt"></i> (69)-33-322</li>
+                           <li><i class="glyphicon glyphicon-envelope"></i> admin-dnipro@etalon.dod.ua</li>
+
+                       </ul>
+                   </div>
+               </div>
+           </div>
+           <div class="col-lg-4">
+               <div class="widget">
+                    <img class="img-fluid" src="/static/images/logo/ukraine.png" >
+               </div>
+           </div>
+       </div> <!--end row-->
+          <div class="row">
+        <div class="col-lg-12 text-center">
+            © Управління зв'язку та інформаційних систем. 2021 рік
+
+        </div>
+    </div>
+    </div> <!--end container-->
+
+</footer>
+</body>
+</html>
+<script>
+    function delete_flash(flash){
+        $(flash).parent().remove()
+    }
+</script>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="{{ url_for('.static',filename='css/css-index.css') }}" >
+</head>
+<body>
+{% block content %}
+
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="alert alert-{{ cat }}"><i class="glyphicon glyphicon-remove" onclick=delete_flash(this)>{{msg}}</i></div>
+{% endfor %}
+
+<div class="form-div">
+
+<form class="login_form" action="" method="post">
+    {{form_admin.hidden_tag()}}
+        <p>{{form_admin.login()}}</p>
+        <p> {{form_admin.psw()}}</p>
+        <p> {{form_admin.remainme()}}<span>Запам'ятати мене</span></p>
+
+    {{form_admin.submit()}}
+
+          {% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+
+</form>
+</div>
+
+<div class="line-up">
+  <hr class="all-lines" id="line-a"></hr>
+<hr class="all-lines" id="line-b"></hr>
+<hr class="all-lines" id="line-c"></hr>
+
+</div>
+{% endblock %}
+</body>

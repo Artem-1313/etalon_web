@@ -1,0 +1,52 @@
+{% extends 'base.html'%}
+{% block content %}
+<div class="container-fluid">
+{% for post in posts.items%}
+ <hr class="invis1">
+
+    <div class="blog-list clearfix">
+        <div class="blog-box row">
+            <div class="col-md-2">
+                <div class="post-media">
+                    <a href="{{ url_for('main.show_post',id_article = post.id )}}" >
+                    <img src="{{post.url}}"  alt="" class="img-fluid">
+                        <div class="hovereffect"></div>
+                    </a>
+                </div><!--end media-->
+            </div><!--end col-md 4-->
+            <div class="blog-meta big-meta col-md-10">
+                <h4><a href="{{ url_for('main.show_post',id_article = post.id )}}" >{{ post.title }}</a></h4>
+                <p>{{ post.text | striptags | truncate(350, True)  }}</p>
+                <small>{{post.author}}</small>
+                <small class="text-muted">{{post.date_post.strftime('%Y-%m-%d')}}</small>
+
+            </div><!--end blog-meta-->
+        </div><!--end blog-box-->
+
+
+
+    </div><!--end blog-list clearfix-->
+
+
+
+{% endfor %}
+    {% if not posts.items%}
+   <div class="search_error">
+        Нічого не знайдено...
+        <img src="/static/images/logo/search_error.png">
+   </div>
+
+    {% endif %}
+    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num %}
+        {% if posts.page == page_num %}
+     <a class="btn btn-primary mb-8" href="{{url_for('main.search',page=page_num, q=q)}}">{{ page_num }}</a>
+         {% else %}
+      <a class="btn btn-default mb-8" href="{{url_for('main.search',page=page_num, q=q)}}">{{ page_num }}</a>
+        {% endif %}
+    {% else %}
+        ...
+    {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

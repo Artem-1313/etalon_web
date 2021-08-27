@@ -1,0 +1,116 @@
+{% extends 'base.html'%}
+{% block content %}
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <form class="form-horizontal">
+                 <div class="form-group has-feedback">
+
+                      <input type="text" class="form-control" id="inputSuccess" onkeyup="myFunction()" placeholder="Введіть номер в/ч або позивний...">
+                      <span class="glyphicon glyphicon-search form-control-feedback" style="color: #009de5;"></span>
+
+                 </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+<table id="DovidnikAddress" class="table table-bordered" style="display:none;">
+    <thead >
+        <tr class="info">
+            <th scope="col">Підрозділ</th>
+            <th scope="col">Позивний</th>
+            <th scope="col">Абонент</th>
+            <th scope="col">АТС (код зони - 69)</th>
+            <th scope="col">ЗСУ002</th>
+            <th scope="col">ЗСУ001</th>
+        </tr>
+    </thead>
+    <tbody>
+   {% for n in phones %}
+
+
+  <tr class="table-light">
+
+	<td>{{ n.unit }}</td>
+	<td>{{ n.calling_name }}</td>
+	<td>{{ n.abonent }}</td>
+	<td>{{ n.ats }}</td>
+	<td>{{ n.mosi }}</td>
+	<td>{{ n.zsoi }}</td>
+
+</tr>
+ {% endfor %}
+    </tbody>
+</table>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+function SearchTelNumber(){
+var Tel_input=document.getElementById('inputSuccess');
+
+var filter=Tel_input.value;
+var table=document.getElementById('DovidnikAddress');
+var tr=table.getElementsByTagName('tr');
+var td;//Пошук АТС
+var td1;//Пошук МОСІ
+var td3;//Пошук ЗСОІ
+
+
+for(var i=1;i<tr.length;i++){
+td=tr[i].getElementsByTagName('td')[3];
+td1=tr[i].getElementsByTagName('td')[4];
+td3=tr[i].getElementsByTagName('td')[5];
+var  re=new RegExp(filter,"g");
+if(td.innerHTML.replace(/-/g,"").match(re)!=null || td.innerHTML.match(re)!=null||td1.innerHTML.replace(/-/g,"").match(re)!=null || td1.innerHTML.match(re)!=null||td3.innerHTML.match(re)!=null){
+tr[i].style.display='';
+table.style.display='table';
+}
+else{
+tr[i].style.display='none';
+//table.style.display='none';
+
+
+}
+
+
+}
+//прячем таблицу, если поле ввода пустое
+if(filter==""){table.style.display='none'}
+}
+
+function myFunction(){
+var input=document.getElementById('inputSuccess');
+var filter=input.value.toUpperCase();
+var table=document.getElementById('DovidnikAddress');
+var tr=table.getElementsByTagName('tr');
+var td;
+var td1;
+
+
+for(var i=1;i<tr.length;i++){
+td=tr[i].getElementsByTagName('td')[1];
+td1=tr[i].getElementsByTagName('td')[0];
+if(td.innerHTML.toUpperCase().indexOf(filter)> -1 || td1.innerHTML.toUpperCase().indexOf(filter)> -1){
+tr[i].style.display=''
+table.style.display='table'
+}
+else{
+tr[i].style.display='none'
+}
+
+}
+//прячем таблицу, если поле ввода пустое
+if(filter==''){table.style.display='none'}
+
+}
+</script>
+{% endblock %}

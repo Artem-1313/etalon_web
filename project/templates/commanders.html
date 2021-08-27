@@ -1,0 +1,87 @@
+{% extends 'base.html'%}
+{% block content %}
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+<div class="container header-commander">
+  <h2><span>Командування</span></h2>
+  {% for art in commanders|batch(3, '&nbsp;')   %}
+  <div class="row">
+    {% for i in art %}
+
+      {% if i.img%}
+     <div class="col-lg-4">
+
+           <img class="myImg" src="/static/images/commanders/{{ i.img}}" width="360" height="465" alt="{{i.full_name}}">
+            <div class="description">
+                {{ i.position }} <p>{{ i.rank }}  {{ i.full_name}}  </p>
+
+
+     </div>
+  </div>
+      {% endif %}
+    {% endfor %}
+</div>
+  {% endfor %}
+
+   <h2><span>Управління зв'язку</span></h2>
+  {% for art in uz_comm |batch(3, '&nbsp;')   %}
+  <div class="row">
+    {% for i in art %}
+
+      {% if i.img%}
+     <div class="col-lg-4">
+
+           <img class="myImg" src="/static/images/commanders/{{ i.img}}" width="360" height="465" alt="{{i.full_name}}">
+            <div class="description">
+       {{ i.position }} {{ i.rank }}
+                <p>{{ i.full_name}}</p>
+
+     </div>
+  </div>
+      {% endif %}
+    {% endfor %}
+</div>
+  {% endfor %}
+
+</div>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var img = document.getElementsByClassName("myImg");
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+for (var i=0;i<img.length;i++){
+img[i].onclick = function(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+
+}
+}
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+   modalImg.src = this.src;
+  captionText.innerHTML = this.alt;
+}
+</script>
+
+
+
+{% endblock %}
+
+
+

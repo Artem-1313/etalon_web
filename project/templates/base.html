@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap/css/bootstrap.min.css') }}" >
+<link rel="stylesheet" href="{{ url_for('static',filename='css/font-awesome.min.css') }}" >
+
+<!-- Optional theme -->
+<link rel="stylesheet"  href="{{ url_for('static',filename='css/bootstrap/css/bootstrap-theme.min.css')}}">
+<script src="{{ url_for('static',filename='js/jquery-3.6.0.min.js') }}"></script>
+<!-- Slider slick -->
+    <script src="{{ url_for('static',filename='js/slick-1.8.1/slick/slick.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='js/slick-1.8.1/slick/slick.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='js/slick-1.8.1/slick/slick-theme.css') }}"/>
+<!-- Latest compiled and minified JavaScript -->
+<script src="{{ url_for('static',filename='css/bootstrap/js/bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}" >
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/commanders_images.css') }}" >
+    <meta charset="UTF-8">
+
+</head>
+
+
+
+
+
+<body>
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#etalon-menu">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><img src="/static/images/1.png" width="80" class="d-inline-block align-text-top"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="etalon-menu">
+            <ul class="nav navbar-nav">
+                <li class="test"><a href="{{url_for('main.index')}}">Головна</a> </li>
+                 <li class="test"><a href="{{url_for('main.cyber')}}">Кібербезпека</a> </li>
+                 <li class="test"><a href="{{url_for('main.communication')}}">Зв'язок</a> </li>
+                 <li class="test"><a href="{{url_for('main.show_commanders')}}">Командири</a> </li>
+                <li class="dropdown test">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Документація<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="{{ url_for('main.show_documents',type_of_doc='asu_doc') }}">АСУ "Дніпро"</a></li>
+                            <li class="divider"></li>
+                          <li><a href="{{ url_for('main.show_documents',type_of_doc='isd_doc') }}">ІСД-Інтернет</a></li>
+                            <li class="divider"></li>
+                          <li><a href="{{ url_for('main.show_documents',type_of_doc='cyber_doc') }}">Кібербезпека</a></li>
+                            <li class="divider"></li>
+
+                        </ul>
+                </li>
+                 <li class="dropdown test">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Довідники<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="{{ url_for('main.phonebook') }}">Телефонний довідник</a></li>
+                            <li class="divider"></li>
+                          <li><a href="{{ url_for('main.show_emails') }}">Довідник електронних адрес</a></li>
+                        </ul>
+                </li>
+
+            </ul>
+            <form action="{{url_for('main.search') }}" class="form-inline my-1 my-lg-0" method="get">
+
+              <input class="form-control mr-sm-2" type="text" required  placeholder="Пошук по статтям" aria-label="Search" name="q" >
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Знайти</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container" style="min-height:1000px;">
+{% block content %}{% endblock %}
+</div>
+<footer class="footer">
+    <div class="container-fluid">
+       <div class="row">
+           <div class="col-lg-5">
+               <div class="widget">
+                    <h2 class="widget-title"> Оперативне командування "Схід" </h2>
+                   <div style="color: #999999 !important;">Офіційний сайт в АСУ "Дніпро"<p>Сайт працює в тестовому режимі.</p></div>
+               </div>
+
+           </div>
+           <div class="col-lg-4">
+               <div class="widget">
+                   <h2 class="widget-title">
+                       Корисні посилання
+                   </h2>
+                   <div class="link">
+                       <ul>
+                           <li><a href="http://www.dod.ua">АСУ "Дніпро"</a></li>
+                           <li>ЦКБ ІТС</li>
+                           <li>ГІТВ "Легенда"</li>
+                           <li>3 ЦЗІ та КБ в ІТС</li>
+                       </ul>
+                   </div>
+               </div>
+           </div>
+           <div class="col-lg-3">
+               <div class="widget">
+                   <h2 class="widget-title">
+                       Зв'язок з нами
+                   </h2>
+                    <div class="link">
+                       <ul>
+                           <li> <i class="glyphicon glyphicon-flag"></i> Надії Алексеєнко 42</li>
+                           <li> <i class="glyphicon glyphicon-phone-alt"></i> (69)-33-322</li>
+                           <li> <i class="glyphicon glyphicon-envelope"></i> admin-dnipro@etalon.dod.ua</li>
+
+                       </ul>
+                   </div>
+               </div>
+           </div>
+       </div> <!--end row-->
+          <div class="row">
+        <div class="col-lg-12 text-center">
+            © Управління зв'язку та інформаційних систем. 2021 рік
+        </div>
+    </div>
+    </div> <!--end container-->
+
+</footer>
+
+</body>
+
+</html>

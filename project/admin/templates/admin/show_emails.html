@@ -1,0 +1,53 @@
+{% extends 'admin/base.html'%}
+
+{% block content %}
+
+<div class="container">
+    <form action="{{url_for('admin.add_email')}}">
+
+         <input type="submit" class="btn btn-info" value="Додати email" />
+    </form>
+
+
+</div>
+<br>
+<div class="container">
+    <table class="table table-bordered" style="display:table;">
+    <thead >
+        <tr class="info">
+            <th scope="col">Підрозділ</th>
+            <th scope="col">Позивний</th>
+            <th scope="col">АСУ "Дніпро"</th>
+			<th scope="col">Дія</th>
+        </tr>
+    </thead>
+    <tbody>
+   {% for n in emails %}
+
+
+  <tr class="table-light">
+
+	<td>{{ n.unit }}</td>
+	<td>{{ n.calling_name }}</td>
+	<td>{{ n.asu_e }}</td>
+
+     <td>
+         <button class="btn btn-light"><a href="{{ url_for('admin.edit_email',id=n.id)}}" style="color:green;"><i class="glyphicon glyphicon-edit"></i></a></button>
+           <button class="btn btn-light"  style="color:red;">
+				  <a href="{{ url_for('admin.delete_email',id=n.id)}}" style="color:red;">
+					  <i class="glyphicon glyphicon-remove"></i>
+				  </a>
+           </button>
+     </td>
+</tr>
+ {% endfor %}
+    </tbody>
+</table>
+
+
+</div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'admin/base.html'%}
+
+{% block content %}
+{% for cat, msg in get_flashed_messages(True) %}
+<div class="alert alert-danger">{{msg}}</div>
+{% endfor %}
+
+<div class="container">
+   <form class="add_post" action="" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+    {{ form.hidden_tag() }}
+    <label>Підрозділ</label>
+    {{ form.unit(class_="form-control", value=phones.unit) }}
+    <label>Позивний</label>
+    {{ form.calling_name(class_="form-control", value=phones.calling_name) }}
+    <label>Абонент</label>
+    {{ form.abonent(class_="form-control", value=phones.abonent) }}
+    <label>АТС</label>
+    {{ form.ats(class_="form-control", value=phones.ats) }}
+    <label>МОСІ</label>
+    {{ form.mosi(class_="form-control", value=phones.mosi) }}
+    <label>ЗСОІ</label>
+    {{ form.zsoi(class_="form-control", value=phones.zsoi) }}
+    {% if form.errors %}
+        {% for k,error in form.errors.items() %}
+             <span class="form-control alert alert-danger">{{ error |join(' ') }}</span>
+        {% endfor %}
+        {% endif %}
+    <br>
+    {{ form.submit(class_="btn btn-primary") }}
+    </div>
+</form>
+</div>
+
+
+
+
+{% endblock %}

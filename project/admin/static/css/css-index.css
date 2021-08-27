@@ -1,0 +1,129 @@
+body{
+background:  #354152;;
+}
+
+.form-div{
+  width:450px;
+  z-index:1;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  box-shadow: 0 0 250px #000;
+}
+.login_form{
+  text-align:center;
+  height:250px;
+  background:#354152;
+  border: 5px solid transparent;
+  border-image: linear-gradient(to left top,#adf2f7 10%,  transparent 30%, transparent 70%, #adf2f7 90%);
+  border-image-slice: 1;
+  z-index:2;
+
+}
+
+
+.login_form input[type="text"], .login_form input[type="password"]{
+    width: 60%;
+    height: 1.8rem;
+    background:none;
+    border: 1px solid #242c37;
+    border-radius: 999px;
+
+    color: white;
+    text-align: center;
+    outline:none;
+    transition:0.25s;
+
+}
+
+.login_form input[type="submit"]{
+      background:#42b9ac;
+      color: #fff;
+      margin-bottom: 6rem;
+      border: 1px solid #8ceabb;
+      border-radius: 999px;
+      width: 60%;
+      height:1.8rem;
+
+}
+
+.login_form input[type="text"]:hover, .login_form input[type="password"]:hover{
+  width: 70%;
+  border: 1px solid #42b9ac;
+  color:white;
+
+}
+
+.login_form span{
+    color:#fff;
+    background-color: transparent;
+}
+
+::placeholder{
+  color: #fff;
+}
+
+.all-lines{
+   border:none;
+}
+#line-a {
+
+  position:absolute;
+  border-top:3px dashed #ff9900;
+  width:0;
+  top:30%;
+  left:0;
+  transform:skewY(-50deg);
+  animation: line-move 4s  infinite ;
+  animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000);
+  transform-origin: 0 0;
+}
+
+#line-b {
+  position:absolute;
+  left: 0;
+  bottom: 20%;
+  transform-origin: 0 0;
+  transform: rotate(-13deg);
+  border-top:3px dashed #ff0099;
+  width:0;
+  animation: line-move-b 4s  infinite;
+/*   animation-timing-function: ease; */
+  animation-delay:1s;
+}
+
+#line-c{
+  position:absolute;
+  border-top:3px dashed blue;
+  right: 10%;
+  bottom:0;
+  transform-origin: 100% 0;
+  transform: rotate(70deg);
+  width:0;
+   animation: line-move-c 6s  infinite;
+
+}
+
+
+@keyframes line-move{
+  25% {width:12.1%;}
+}
+
+@keyframes line-move-b{
+  25% {width:102%;}
+}
+
+@keyframes line-move-c{
+  25% {width:51%;}
+}
+
+.login_form .flash{
+
+  background:#e9c8c8;
+  border:1px solid #ff5f5f;
+  color:red;
+  font-size:18px;
+ font-family: cursive;
+
+}
